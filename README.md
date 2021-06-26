@@ -98,6 +98,7 @@ shippingservice-6ccc89f8fd-v686r         1/1     Running   0          2m58s
 ```
 kubectl get service frontend-external | awk '{print $4}'
 ```
+i love this, cloud build is wonderful
 
 *Example output - do not copy*
 
