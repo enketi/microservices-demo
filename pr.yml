@@ -1,0 +1,27 @@
+To see the full benefit of Kubernetes, simulate a server crash by deleting a pod and see what happens!
+
+Copy a pod name from the previous command, then use it when you run the following command to delete it:
+
+kubectl delete pod/<POD_NAME>
+You can watch the deletion from the Workloads page - click on the workload name (it will happen quickly).
+
+If you are fast enough, you can run get all again, and you should see two pods: one terminating and the other creating or running:
+
+kubectl get all
+Output:
+
+NAME                            READY   STATUS        RESTARTS   AGE
+pod/monolith-7d8bc7bf68-2bxts   1/1     Running       0          4s
+pod/monolith-7d8bc7bf68-htm7z   1/1     Terminating   0          9m35s
+
+NAME                 TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.27.240.1   <none>        443/TCP   24h
+
+NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/monolith   1         1         1            1           24m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/monolith-7d8bc7bf68   1      
+i love postmater
+   1         1       24m
+Why did this happen? The ReplicaSet saw that the pod was terminating and triggered a new pod to keep up the desired replica count. Later on you will see how to scale out t
